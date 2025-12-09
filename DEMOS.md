@@ -2,17 +2,17 @@
 
 This file describes the four demos provided in this repository. Each demo directory contains a README with step-by-step instructions and any required sample data.
 
-Demo 1 — Getting started & local setup
+Demo 1 — Graph API Script Generation with R.O.L.E.S. Framework
 
 - Path: demos/demo-1/
-- Goal: Walk attendees through initial setup, installation, and the minimal end-to-end demo.
-- Artifacts: Quickstart script, sample data, slides (optional).
+- Goal: Use the R.O.L.E.S. framework to build a prompt for the "User Inactivity Report" script. Generate the script live, narrating how the AI handles pagination, server-side filtering, and proper authentication scopes. Run the script with -WhatIf to show the output. The script is born.
+- Artifacts: Graph API based script generation, code styling guide/context.
 
-Demo 2 — Automation demo
+Demo 2 — AI-Powered Code Review & Performance Optimization
 
 - Path: demos/demo-2/
-- Goal: Demonstrate an automation flow (scripted workflows or GitHub Actions).
-- Artifacts: Example workflow, playbook, demo data.
+- Goal: Ask our AI co-pilot to act as a senior code reviewer. Benchmark a baseline version of our script. Ask the "senior code reviewer" to refactor it for improved performance. Benchmark it again.
+- Artifacts: Baseline script, refactored script, benchmark results.
 
 Demo 3 — Data & analytics
 
