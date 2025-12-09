@@ -4,7 +4,7 @@ param (
 )
 
 Write-Host "Authenticating to Microsoft Graph..."
-Connect-MgGraph -Scopes "DeviceManagementManagedDevices.Read.All", "DeviceManagementConfiguration.Read.All"
+Connect-MgGraph -Scopes "DeviceManagementManagedDevices.Read.All"
 
 Write-Host "Querying Windows managed devices..."
 try {
@@ -28,7 +28,15 @@ foreach ($device in $devices.value) {
     Write-Host "[$deviceCounter/$($devices.value.Count)] Processing $($device.deviceName)..."
     try {
         $policyStates = Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/$($device.id)/deviceCompliancePolicyStates"
-
+        foreach ($policy in $policyStates.value) {
+            $settingStates = Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/$($device.id)/deviceCompliancePolicyStates/$($policy.id)/settingStates"
+            foreach ($setting in $settingStates.value) {
+                $colName = if ($setting.settingName) { $setting.settingName } elseif ($setting.setting) { $setting.setting } else { $null }
+                if ($colName) {
+                    $allSettingNames[$colName] = $true
+                }
+            }
+        }
     } catch {
         Write-Warning "Failed to get policy/settings for device $($device.deviceName): $_"
     }
